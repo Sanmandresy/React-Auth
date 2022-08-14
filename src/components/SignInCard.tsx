@@ -1,13 +1,32 @@
-import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import React, {useState,useEffect} from 'react';
+import {Link,useNavigate} from "react-router-dom";
 import '../styles/login.css';
+import {useAuthState} from "react-firebase-hooks/auth";
+import Loader from "./Loader";
+import {logInWithEmailAndPassword, auth, signInWithGoogle,signInWithGithub,signInWithFacebook} from "../fire_conf";
 
 const SignInCard : React.FC <{}> = () => {
     const [email,setEmail] = useState<string>("");
     const [password,setPassword] = useState<string>("");
+    const [user,loading] = useAuthState(auth);
+    const [visibility,setVisibility] = useState<string>("hidden");
+    const [card,setCard] = useState<string>("card bg-eo2 max-w-md w-full space-y-8 rounded-lg");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loading) {
+            return;
+        }
+        if (user) navigate("/home");
+        else if (!user) {
+            navigate("/");
+        }
+    }, [user, loading,navigate]);
+
 
     return (<>
-        <div className={"card bg-eo2 max-w-md w-full space-y-8 rounded-lg"} >
+        <Loader visibility={visibility}/>
+        <div className={card} >
             <div>
                 <h2 className="mt-6 text-center text-2xl font-bold text-stone">Login</h2>
             </div>
@@ -45,20 +64,45 @@ const SignInCard : React.FC <{}> = () => {
                         className="group relative lg:w-20 flex py-2 text-sm px-4 mb-1 text-sm font-medium rounded-md text-white text-center shadow-lg hover:bg-heid bg-hei"
                         onClick={(event) => {
                             event.preventDefault();
+                            setVisibility("spinner");
+                            setCard("hidden");
+                            logInWithEmailAndPassword(email,password,setVisibility);
                         }}
                     >
                         <Link to={"/home"}>Sign in</Link>
                     </button>
                 </div>
                 <div className={"flex justify-evenly"}>
-                    <span className={"bg-white w-7 h-7 rounded-full text-center mb-2.5 hover:bg-black hover:text-white "} >
-                        <i className="fa fa-github text-lg"/>
+                    <span
+                        onClick={(event) => {
+                            event.preventDefault();
+                            setVisibility("spinner");
+                            setCard("hidden");
+                            signInWithGithub(setVisibility);
+                        }}
+                        className={"bg-white flex justify-center items-center w-7 h-7 rounded-full mb-2.5 hover:bg-black hover:text-white "}
+                    >
+                        <i className="fa-brands fa-github"/>
                     </span>
-                    <span className={"bg-facebook w-7 h-7 rounded-full text-center mb-2.5 hover:bg-blue"}>
-                        <i className="fa fa-facebook text-sm text-white"/>
+                    <span
+                        onClick={(event) => {
+                            event.preventDefault();
+                            setVisibility("spinner");
+                            setCard("hidden");
+                            signInWithFacebook(setVisibility);
+                        }}
+                        className={"bg-facebook flex justify-center items-center w-7 h-7 rounded-full text-center mb-2.5 hover:bg-blue"}>
+                        <i className="fa-brands fa-facebook text-white"/>
                     </span>
-                    <span className={"bg-white w-7 h-7 rounded-full text-center mb-2.5 hover:bg-grg"}>
-                        <i className="fa fa-google text-sm text-google "/>
+                    <span
+                        onClick={(event) => {
+                            event.preventDefault();
+                            setVisibility("spinner");
+                            setCard("hidden");
+                            signInWithGoogle(setVisibility);
+                        }}
+                        className={"bg-white flex justify-center items-center w-7 h-7 rounded-full text-center mb-2.5 hover:bg-grg"}>
+                        <i className="fa-brands fa-google text-google "/>
                     </span>
                 </div>
             </form>
