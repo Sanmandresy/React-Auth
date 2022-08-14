@@ -1,0 +1,26 @@
+.card{
+    border-radius: 30px;
+    box-shadow: 25px 25px 25px #bebebe,-25px -25px 25px #f7f4f4;
+}
+body{
+    background-color: #e8e8e8;
+}
+
+.hidden{
+    display: none;
+    visibility: hidden;
+}
+.spinner {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid rgb(211,168,78);
+    border-radius: 50%;
+    width: 85px;
+    height: 85px;
+    animation: spin 1s linear infinite;
+    z-index:9999;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
