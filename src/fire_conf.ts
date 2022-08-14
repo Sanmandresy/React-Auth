@@ -5,13 +5,13 @@ import {getFirestore, query, getDocs, collection, where, addDoc} from "firebase/
 
 
 const firebaseConfig = {
-    apiKey:process.env.REACT_APP_API_KEY,
-    authDomain: process.env.AUTHDOMAIN,
-    projectId: process.env.PROJECTID,
-    storageBucket: process.env.STORAGEBUCKET,
-    messagingSenderId: process.env.MESSAGINGSENDERID,
-    appId: process.env.APPID,
-    measurementId: process.env.MEASUREMENTID
+    apiKey:"AIzaSyB0Dg2C1sJv271k736sU3-OFrX0ZGCiX1k",
+    authDomain: "react-ts-firebase-b6b11.firebaseapp.com",
+    projectId: "react-ts-firebase-b6b11",
+    storageBucket: "react-ts-firebase-b6b11.appspot.com",
+    messagingSenderId: "823967191861",
+    appId: "1:823967191861:web:293f6001f37ae6360d727c",
+    measurementId: "G-2G1E23YHSZ"
 };
 
 
