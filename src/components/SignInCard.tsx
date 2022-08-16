@@ -5,6 +5,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import Loader from "./Loader";
 import {logInWithEmailAndPassword, auth, signInWithGoogle,signInWithGithub,signInWithFacebook} from "../fire_conf";
 
+
 const SignInCard : React.FC <{}> = () => {
     const [email,setEmail] = useState<string>("");
     const [password,setPassword] = useState<string>("");
@@ -14,14 +15,9 @@ const SignInCard : React.FC <{}> = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (loading) {
-            return;
-        }
-        if (user) navigate("/home");
-        else if (!user) {
-            navigate("/");
-        }
-    }, [user, loading,navigate]);
+        if (!user) navigate("/login");
+        else navigate("/");
+    },[user,navigate,loading])
 
 
     return (<>
@@ -61,7 +57,7 @@ const SignInCard : React.FC <{}> = () => {
                 </div>
                 <div className={"flex justify-center"}>
                     <button
-                        className="group relative lg:w-20 flex py-2 text-sm px-4 mb-1 text-sm font-medium rounded-md text-white text-center shadow-lg hover:bg-heid bg-hei"
+                        className="group relative lg:w-20 flex py-2 px-4 mb-1 text-sm font-medium rounded-md text-white text-center shadow-lg hover:bg-heid bg-hei"
                         onClick={(event) => {
                             event.preventDefault();
                             setVisibility("spinner");
