@@ -9,7 +9,7 @@ const NavBar : React.FC <{visible:string}> = (props) => {
     const navigate = useNavigate();
     const link = user?.photoURL;
 
-        if (!user) navigate("/login");
+    if (!user) navigate("/login");
 
     return (<>
         <nav className={visible}>

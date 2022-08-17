@@ -26,12 +26,15 @@ const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-const logInWithEmailAndPassword  = async (email:string, password:string,setVisibility:Dispatch<SetStateAction<any>>) => {
+const logInWithEmailAndPassword  = async (email:string, password:string,setVisibility:Dispatch<SetStateAction<any>>,setCard:Dispatch<SetStateAction<any>>,setError:Dispatch<SetStateAction<any>>) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         setVisibility("hidden");
     } catch (error) {
         console.error(error);
+        setVisibility("hidden");
+        setCard("card bg-eo2 max-w-md w-full space-y-8 rounded-lg");
+        setError("flex justify-center py-3 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800");
     }
 };
 
