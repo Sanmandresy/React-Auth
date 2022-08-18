@@ -10,3 +10,8 @@ You can sign in with :
 - Github
 - Facebook
 - Email and Password (**You need to be registered in the database first**)
+
+**Credential**
+
+ - email: ny.hasina@hei.school
+ - password : examenEl145
